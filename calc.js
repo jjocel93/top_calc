@@ -5,7 +5,7 @@ function muliplyNumbers(a, b) {
 }
 
 function divideNumbers(a, b) {
-  return parseInt(a) / parseInt(b);
+  return parseInt(a) / parseInt(b).toFixed(2);
 }
 
 function addNumbers(a, b) {
