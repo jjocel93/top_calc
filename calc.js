@@ -82,7 +82,11 @@ opbuttons.forEach((opbutton) =>
 );
 
 equals.addEventListener('click', () => {
-  if (result === '') {
+  if (firstNumber === '' && secondNumber === '') {
+    display.textContent = '';
+  } else if (firstNumber != '' && secondNumber === '') {
+    display.textContent = firstNumber;
+  } else if (result === '') {
     const equalValue = operate(firstNumber, secondNumber, operator);
     result += equalValue;
     display.textContent = result;
@@ -97,4 +101,12 @@ equals.addEventListener('click', () => {
     firstNumber = result;
     secondNumber = '';
   }
+});
+
+clear.addEventListener('click', () => {
+  result = '';
+  operator = '';
+  secondNumber = '';
+  firstNumber = '';
+  display.textContent = '';
 });
