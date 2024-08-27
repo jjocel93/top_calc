@@ -1,11 +1,10 @@
-//Create functions for operators
-
-function muliplyNumbers(a, b) {
+// Create functions for operators
+function multiplyNumbers(a, b) {
   return parseInt(a) * parseInt(b);
 }
 
 function divideNumbers(a, b) {
-  return parseInt(a) / parseInt(b).toFixed(2);
+  return (parseInt(a) / parseInt(b)).toFixed(2);
 }
 
 function addNumbers(a, b) {
@@ -17,7 +16,6 @@ function subtractNumbers(a, b) {
 }
 
 // Create a variable for the first number, the operator, and the second number
-
 let firstNumber = '';
 let operator = '';
 let secondNumber = '';
@@ -31,82 +29,67 @@ function operate(firstNumber, secondNumber, operator) {
     case '-':
       return subtractNumbers(firstNumber, secondNumber);
     case '*':
-      return muliplyNumbers(firstNumber, secondNumber);
+      return multiplyNumbers(firstNumber, secondNumber);
     case '/':
       return divideNumbers(firstNumber, secondNumber);
+    default:
+      return null;
   }
 }
 
-// create reference to be able to make events for buttons and display
+// Create references to buttons and display
 const buttons = document.querySelectorAll('.Btn-number');
-
 const opbuttons = document.querySelectorAll('.Btn-operator');
-
 const display = document.querySelector('.Display');
-
 const equals = document.querySelector('.Btn-equals');
-
 const clear = document.querySelector('#clear');
+const decimal = document.querySelector('#decimal');
 
-const decimcal = document.querySelector('#decimal');
+// Helper function to update the display
+function updateDisplay(value) {
+  display.textContent = value;
+}
 
-// add event listener for button selections depending on if operator is undefined or present
-
+// Event listener for number buttons
 buttons.forEach((button) =>
   button.addEventListener('click', () => {
     const buttonValue = button.getAttribute('data-num');
-    if (operator === '') {
+    if (!operator) {
       firstNumber += buttonValue;
-      display.textContent = firstNumber;
+      updateDisplay(firstNumber);
     } else {
       secondNumber += buttonValue;
-      display.textContent = secondNumber;
+      updateDisplay(secondNumber);
     }
   })
 );
 
-// add event listener for operator being selected
+// Event listener for operator buttons
 opbuttons.forEach((opbutton) =>
   opbutton.addEventListener('click', () => {
-    if (result === '') {
-      const buttonValue = opbutton.getAttribute('data-num');
-      operator += buttonValue;
-      display.textContent = operator;
-    } else {
-      const buttonValue = opbutton.getAttribute('data-num');
-      operator = '';
-      operator += buttonValue;
-      display.textContent = operator;
-    }
+    if (!firstNumber) return;
+    operator = opbutton.getAttribute('data-num');
+    updateDisplay(operator);
   })
 );
 
+// Event listener for equals button
 equals.addEventListener('click', () => {
-  if (firstNumber === '' && secondNumber === '') {
-    display.textContent = '';
-  } else if (firstNumber != '' && secondNumber === '') {
-    display.textContent = firstNumber;
-  } else if (result === '') {
-    const equalValue = operate(firstNumber, secondNumber, operator);
-    result += equalValue;
-    display.textContent = result;
-    firstNumber = result;
-    operator = '';
-    secondNumber = '';
-  } else {
-    result = '';
-    const equalValue = operate(firstNumber, secondNumber, operator);
-    result += equalValue;
-    display.textContent = result;
-    firstNumber = result;
-    secondNumber = '';
-  }
-});
-
-clear.addEventListener('click', () => {
-  result = '';
+  if (!firstNumber || !secondNumber) return;
+  result = operate(firstNumber, secondNumber, operator);
+  updateDisplay(result);
+  firstNumber = result;
   operator = '';
   secondNumber = '';
-  firstNumber = '';
-  display.textContent = '';
 });
+
+// Event listener for clear button
+clear.addEventListener('click', () => {
+  firstNumber = '';
+  operator = '';
+  secondNumber = '';
+  result = '';
+  updateDisplay('');
+});
+
+// Event listener for decimal button
