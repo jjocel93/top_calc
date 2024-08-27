@@ -54,13 +54,15 @@ function updateDisplay(value) {
 buttons.forEach((button) =>
   button.addEventListener('click', () => {
     const buttonValue = button.getAttribute('data-num');
-    if (!operator) {
-      firstNumber += buttonValue;
-      updateDisplay(firstNumber);
-    } else {
-      secondNumber += buttonValue;
-      updateDisplay(secondNumber);
-    }
+    if (!result) {
+      if (!operator) {
+        firstNumber += buttonValue;
+        updateDisplay(firstNumber);
+      } else {
+        secondNumber += buttonValue;
+        updateDisplay(secondNumber);
+      }
+    } else return;
   })
 );
 
@@ -70,6 +72,7 @@ opbuttons.forEach((opbutton) =>
     if (!firstNumber) return;
     operator = opbutton.getAttribute('data-num');
     updateDisplay(operator);
+    result = '';
   })
 );
 
@@ -93,3 +96,7 @@ clear.addEventListener('click', () => {
 });
 
 // Event listener for decimal button
+
+// decimal.addEventListener("click", () => {
+//     if(decimal)
+// })
