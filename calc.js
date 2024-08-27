@@ -42,6 +42,7 @@ const display = document.querySelector('.Display');
 const equals = document.querySelector('.Btn-equals');
 const clear = document.querySelector('#clear');
 const decimal = document.querySelector('#decimal');
+const del = document.querySelector('#delete');
 
 // Helper function to update the display
 const updateDisplay = (value) => {
@@ -110,4 +111,16 @@ clear.addEventListener('click', () => {
   result = '';
   decimalAdded = false; // Reset decimal flag
   updateDisplay('');
+});
+
+//Event listener for delete button
+del.addEventListener('click', () => {
+  if (result) return;
+  if (!operator) {
+    firstNumber = firstNumber.slice(0, -1);
+    updateDisplay(firstNumber);
+  } else if (secondNumber) {
+    secondNumber = secondNumber.slice(0, -1);
+    updateDisplay(secondNumber);
+  }
 });
