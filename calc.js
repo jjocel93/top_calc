@@ -124,3 +124,21 @@ del.addEventListener('click', () => {
     updateDisplay(secondNumber);
   }
 });
+
+// Event listener for keyboard input
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  if (!isNaN(key)) {
+    document.querySelector(`.Btn-number[data-num="${key}"]`).click();
+  } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+    document.querySelector(`.Btn-operator[data-num="${key}"]`).click();
+  } else if (key === 'Enter') {
+    equals.click();
+  } else if (key === 'Escape') {
+    clear.click();
+  } else if (key === 'Backspace') {
+    del.click();
+  } else if (key === '.') {
+    decimal.click();
+  }
+});
