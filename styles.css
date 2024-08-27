@@ -15,7 +15,7 @@
   color: white;
   display: flex;
   justify-content: flex-end;
-  font-size: 60px;
+  font-size: 50px;
   align-items: flex-end;
 }
 
@@ -43,4 +43,8 @@ button {
 
 #equals {
   background-color: green;
+}
+
+.Btn-decimal {
+  background-color: orange;
 }

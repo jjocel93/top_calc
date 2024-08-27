@@ -4,7 +4,11 @@ function multiplyNumbers(a, b) {
 }
 
 function divideNumbers(a, b) {
-  return (parseInt(a) / parseInt(b)).toFixed(2);
+  if (b === '0') {
+    return "You can't do this stupid head, clear calc!";
+  } else {
+    return (parseInt(a) / parseInt(b)).toFixed(2);
+  }
 }
 
 function addNumbers(a, b) {
@@ -95,8 +99,6 @@ clear.addEventListener('click', () => {
   updateDisplay('');
 });
 
-// Event listener for decimal button
+// Display a snarky error message if the user tries to divide by 0…
 
-// decimal.addEventListener("click", () => {
-//     if(decimal)
-// })
+// Event listener for decimal button
